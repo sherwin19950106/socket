@@ -1,11 +1,14 @@
 import socket
 
-sk =socket.socket()
-ip_port = ('127.0.0.1',9988)
-sk.bind(ip_port)
+
+ip = ('127.0.0.1', 9516)
+sk = socket.socket()
+sk.bind(ip)
 sk.listen(5)
-conn,addr = sk.accept()
-client_data = conn.recv(1024)
-print(str(client_data,'utf8'))
+print('server 开始监听')
+conn, addr =sk.accept()
+client_date = conn.recv(1024)
+print('address:' + str(addr))
+print('来自client的数据：' + str(client_date, 'utf8'))
 conn.sendall(bytes('i am server',encoding='utf8'))
 sk.close()
