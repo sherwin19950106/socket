@@ -6,9 +6,12 @@ sk = socket.socket()
 sk.bind(ip)
 sk.listen(5)
 print('server 开始监听')
-conn, addr =sk.accept()
-client_date = conn.recv(1024)
-print('address:' + str(addr))
-print('来自client的数据：' + str(client_date, 'utf8'))
-conn.sendall(bytes('i am server',encoding='utf8'))
+while True:
+    conn, addr =sk.accept()
+    print(addr)
+    while True:
+        client_date = conn.recv(1024)
+        if str(client_date, 'utf8') =='exit': break
+        print('来自client的数据：' + str(client_date, 'utf8'))
+        conn.sendall(bytes(input('server:'), encoding='utf8'))
 sk.close()
